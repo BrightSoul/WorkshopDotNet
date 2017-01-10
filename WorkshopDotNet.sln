@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopDotNet", "WorkshopDotNet.csproj", "{8BF50AA3-2EA5-45FE-8CB8-751509043908}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopDotNet.Modello", "src\WorkshopDotNet.Modello\WorkshopDotNet.Modello.csproj", "{8BF50AA3-2EA5-45FE-8CB8-751509043908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopDotNet.Test", "WorkshopDotNet.Test\WorkshopDotNet.Test\WorkshopDotNet.Test.csproj", "{1655125B-B8E1-40F4-AA8D-78623C5BB0D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopDotNet.Test", "src\WorkshopDotNet.Test\WorkshopDotNet.Test\WorkshopDotNet.Test.csproj", "{1655125B-B8E1-40F4-AA8D-78623C5BB0D5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documenti", "Documenti", "{AA979F95-E46A-4331-80E9-993A27516333}"
+	ProjectSection(SolutionItems) = preProject
+		docs\Specifica.txt = docs\Specifica.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

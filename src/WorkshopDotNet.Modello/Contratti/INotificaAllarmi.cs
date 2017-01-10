@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkshopDotNet.Servizi
+namespace WorkshopDotNet.Modello.Contratti
 {
     public interface INotificaAllarmi
     {

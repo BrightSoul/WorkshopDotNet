@@ -1,4 +1,4 @@
-﻿namespace WorkshopDotNet.Entita
+﻿namespace WorkshopDotNet.Modello.Entita
 {
     public class Telemetria
     {

@@ -1,0 +1,12 @@
+Il dispositivo ti manderà messaggi di telemetria come stringhe JSON:
+    {"temperatura": 4.5,"umidità": 75 }
+    {"motoreAcceso": true }
+    {"settaggioTemperatura": 4.0 }
+
+La temperatura è espressa in gradi centigradi e l’umidità in percentuale.
+
+SPECIFICA
+- Essendo frigoriferi, se la temperatura è > 10 °C, mi devi notificare un allarme;
+- I valori di umidità, temperatura e stato di accensione del motore li voglio vedere in tempo reale nel portale web;
+- ...e me li storicizzi nel DB insieme alla data/ora;
+- Del settaggio della temperatura invece mi serve solo che conservi il valore attuale.

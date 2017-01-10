@@ -4,28 +4,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkshopDotNet.Entita;
+using WorkshopDotNet.Modello.Entita;
 
 namespace WorkshopDotNet.Servizi
 {
     public class LeggiMessaggio
     {
-        private readonly INotificaAllarmi notificaAllarmi;
+        private readonly ILettoreTelemetria[] lettoriTelemetria;
 
-        public LeggiMessaggio(INotificaAllarmi notificaAllarmi)
+        public LeggiMessaggio(params ILettoreTelemetria[] lettoriTelemetria)
         {
-            this.notificaAllarmi = notificaAllarmi;
+            this.lettoriTelemetria = lettoriTelemetria;
         }
 
         public Telemetria Leggi(string messaggio)
         {
             Telemetria telemetria = JsonConvert.DeserializeObject<Telemetria>(messaggio);
-
-            if (telemetria.Temperatura > 10) {
-
-                notificaAllarmi.NotificaTemperaturaTroppoAlta(telemetria.Temperatura);
+            foreach (var lettoreTelemetria in lettoriTelemetria)
+            {
+                lettoreTelemetria.Leggi(telemetria);
             }
-
             return telemetria;
         }
     }
