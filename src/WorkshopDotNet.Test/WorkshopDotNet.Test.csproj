@@ -58,7 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WorkshopDotNet.Modello\WorkshopDotNet.Modello.csproj">
+    <ProjectReference Include="..\WorkshopDotNet.Modello\WorkshopDotNet.Modello.csproj">
       <Project>{8bf50aa3-2ea5-45fe-8cb8-751509043908}</Project>
       <Name>WorkshopDotNet</Name>
     </ProjectReference>
