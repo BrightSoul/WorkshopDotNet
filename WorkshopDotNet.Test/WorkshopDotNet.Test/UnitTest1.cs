@@ -2,6 +2,8 @@
 using WorkshopDotNet.Servizi;
 using WorkshopDotNet.Entita;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WorkshopDotNet.Test.Mocks;
+using NSubstitute;
 
 namespace WorkshopDotNet.Test
 {
@@ -9,11 +11,12 @@ namespace WorkshopDotNet.Test
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void LeggiMessaggioDeveLeggereCorrettamenteValoriDiTemperaturaEUmidita()
         {
             //arrange
             string messaggio = "{\"temperatura\": 4.5,\"umidita\": 75 }";
-            var leggiMessaggio = new LeggiMessaggio();
+            MockNotificaAllarmi notificaAllarmi = new MockNotificaAllarmi();
+            var leggiMessaggio = new LeggiMessaggio(notificaAllarmi);
 
             //act
             Telemetria telemetria = leggiMessaggio.Leggi(messaggio);
@@ -22,6 +25,22 @@ namespace WorkshopDotNet.Test
             Assert.AreEqual(4.5, telemetria.Temperatura);
             Assert.AreEqual(75, telemetria.Umidita);
 
+        }
+
+        [TestMethod]
+        public void SeLaTemperaturaMaggioreDi10GradiNotificaAllarme() {
+            //arrange
+            string messaggio = "{\"temperatura\": 10.5,\"umidita\": 75 }";
+            //MockNotificaAllarmi notificaAllarmi = new MockNotificaAllarmi();
+            var notificaAllarmi = Substitute.For<INotificaAllarmi>();
+
+            var leggiMessaggio = new LeggiMessaggio(notificaAllarmi);
+
+            //act
+            Telemetria telemetria = leggiMessaggio.Leggi(messaggio);
+
+            //assert
+            //Assert.AreEqual(true, notificaAllarmi.TemperaturaTroppoAltaNotificata);
         }
     }
 }
