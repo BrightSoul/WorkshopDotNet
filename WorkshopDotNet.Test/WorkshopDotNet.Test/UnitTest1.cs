@@ -40,7 +40,7 @@ namespace WorkshopDotNet.Test
             Telemetria telemetria = leggiMessaggio.Leggi(messaggio);
 
             //assert
-            //Assert.AreEqual(true, notificaAllarmi.TemperaturaTroppoAltaNotificata);
+            notificaAllarmi.Received().NotificaTemperaturaTroppoAlta(10.5);
         }
     }
 }
