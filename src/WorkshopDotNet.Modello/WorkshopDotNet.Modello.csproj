@@ -51,7 +51,7 @@
     <Compile Include="Contratti\INotificaAllarmi.cs" />
     <Compile Include="Servizi\LettoriMessaggio\SalvaSettaggioTemperatura.cs" />
     <Compile Include="Servizi\LettoriMessaggio\VisualizzaTelemetriaInTempoReale.cs" />
-    <Compile Include="Servizi\LettoriMessaggio\SalvaTelemetria.cs" />
+    <Compile Include="Servizi\LettoriMessaggio\StoricizzaValoriTelemetria.cs" />
     <Compile Include="Servizi\LettoriMessaggio\VerificaAllarmiTemperatura.cs" />
   </ItemGroup>
   <ItemGroup>

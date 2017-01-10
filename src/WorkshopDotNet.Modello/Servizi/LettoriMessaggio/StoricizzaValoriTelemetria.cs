@@ -7,10 +7,11 @@ using WorkshopDotNet.Modello.Entita;
 
 namespace WorkshopDotNet.Servizi.LettoriMessaggio
 {
-    public class SalvaTelemetria : ILettoreTelemetria
+    public class StoricizzaValoriTelemetria : ILettoreTelemetria
     {
         public void Leggi(Telemetria telemetria)
         {
+            throw new NotImplementedException();
         }
     }
 }

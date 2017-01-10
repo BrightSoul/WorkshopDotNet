@@ -13,6 +13,7 @@ namespace WorkshopDotNet.Modello.Servizi.LettoriMessaggio
     {
         public void Leggi(Telemetria telemetria)
         {
+            throw new NotImplementedException();
         }
     }
 }
