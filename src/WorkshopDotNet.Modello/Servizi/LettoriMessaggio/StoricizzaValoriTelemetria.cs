@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkshopDotNet.Modello.Entita;
+using WorkshopDotNet.Modello.Servizi;
 
 namespace WorkshopDotNet.Servizi.LettoriMessaggio
 {
@@ -11,7 +12,14 @@ namespace WorkshopDotNet.Servizi.LettoriMessaggio
     {
         public void Leggi(Telemetria telemetria)
         {
-            throw new NotImplementedException();
+            using(Contesto contesto = new Contesto())
+            {
+                contesto.Set<Telemetria>().Add(telemetria);
+                contesto.SaveChanges();
+            }
+
+
+            //throw new NotImplementedException();
         }
     }
 }
