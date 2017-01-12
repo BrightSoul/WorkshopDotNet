@@ -55,9 +55,9 @@
   <ItemGroup>
     <Compile Include="Contratti\ILettoreTelemetria.cs" />
     <Compile Include="Entita\Dispositivo.cs" />
-    <Compile Include="Migrations\201701111116595_InitialCreate.cs" />
-    <Compile Include="Migrations\201701111116595_InitialCreate.Designer.cs">
-      <DependentUpon>201701111116595_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201701121432308_ModelloIniziale.cs" />
+    <Compile Include="Migrations\201701121432308_ModelloIniziale.Designer.cs">
+      <DependentUpon>201701121432308_ModelloIniziale.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Servizi\Contesto.cs" />
@@ -75,8 +75,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701111116595_InitialCreate.resx">
-      <DependentUpon>201701111116595_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701121432308_ModelloIniziale.resx">
+      <DependentUpon>201701121432308_ModelloIniziale.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

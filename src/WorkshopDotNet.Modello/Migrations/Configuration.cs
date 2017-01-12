@@ -9,7 +9,7 @@ namespace WorkshopDotNet.Modello.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = false;
             ContextKey = "WorkshopDotNet.Modello.Servizi.Contesto";
         }

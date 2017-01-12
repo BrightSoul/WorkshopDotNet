@@ -7,13 +7,13 @@ namespace WorkshopDotNet.Modello.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class ModelloIniziale : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ModelloIniziale));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701111116595_InitialCreate"; }
+            get { return "201701121432308_ModelloIniziale"; }
         }
         
         string IMigrationMetadata.Source

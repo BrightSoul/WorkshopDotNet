@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkshopDotNet.Modello.Entita;
+using WorkshopDotNet.Modello.Migrations;
 
 namespace WorkshopDotNet.Modello.Servizi
 {
@@ -12,7 +13,8 @@ namespace WorkshopDotNet.Modello.Servizi
     {
         static Contesto()
         {
-            //Database.SetInitializer<Contesto>(new MigrateDatabaseToLatestVersion<Contesto>)
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Contesto>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<Contesto, Configuration>());
         }
 
         public Contesto() : this("Data Source=(localdb)\\MSSQLLocalDb;Initial Catalog=WorkshopDotNet;Integrated Security=True")

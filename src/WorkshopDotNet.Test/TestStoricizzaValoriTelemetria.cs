@@ -11,7 +11,7 @@ namespace WorkshopDotNet.Test
     public class TestStoricizzaValoriTelemetria
     {
         [TestMethod]
-        public void TestMethod1()
+        public void StoricizzaValoriTelemetriaDeveAggiungereCorrettamenteGliOggettiTelemetria()
         {
             //arrange
 

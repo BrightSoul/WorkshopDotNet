@@ -3,7 +3,7 @@ namespace WorkshopDotNet.Modello.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class ModelloIniziale : DbMigration
     {
         public override void Up()
         {
@@ -28,6 +28,7 @@ namespace WorkshopDotNet.Modello.Migrations
                     {
                         IdDispositivo = c.Int(nullable: false, identity: true),
                         Descrizione = c.String(),
+                        DataInstallazione = c.DateTime(),
                     })
                 .PrimaryKey(t => t.IdDispositivo);
             
