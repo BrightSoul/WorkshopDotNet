@@ -59,6 +59,10 @@
     <Compile Include="Migrations\201701121432308_ModelloIniziale.Designer.cs">
       <DependentUpon>201701121432308_ModelloIniziale.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701131057101_ValidazioneDescrizione.cs" />
+    <Compile Include="Migrations\201701131057101_ValidazioneDescrizione.Designer.cs">
+      <DependentUpon>201701131057101_ValidazioneDescrizione.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Servizi\Contesto.cs" />
     <Compile Include="Servizi\LeggiMessaggio.cs" />
@@ -77,6 +81,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701121432308_ModelloIniziale.resx">
       <DependentUpon>201701121432308_ModelloIniziale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701131057101_ValidazioneDescrizione.resx">
+      <DependentUpon>201701131057101_ValidazioneDescrizione.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,7 +9,7 @@ using WorkshopDotNet.Modello.Migrations;
 
 namespace WorkshopDotNet.Modello.Servizi
 {
-    public class Contesto:DbContext
+    public class Contesto : DbContext
     {
         static Contesto()
         {
@@ -44,11 +44,22 @@ namespace WorkshopDotNet.Modello.Servizi
                 .WithRequired(telemetria => telemetria.Dispositivo)
                 .HasForeignKey(telemetria => telemetria.IdDispositivo);
 
+            /*
+            modelBuilder
+                .Entity<Dispositivo>()
+                .Property(d => d.Descrizione)
+                .HasColumnType("varchar")
+                .HasMaxLength(100);
+            */
            /* modelBuilder
                 .Entity<Telemetria>()
                 .HasRequired(telemetria => telemetria.Dispositivo)
                 .WithMany(dispositivo => dispositivo.Telemetria)
                 .HasForeignKey(telemetria => telemetria.IdDispositivo); */
+            
+
         }
+
+        public System.Data.Entity.DbSet<WorkshopDotNet.Modello.Entita.Dispositivo> Dispositivoes { get; set; }
     }
 }

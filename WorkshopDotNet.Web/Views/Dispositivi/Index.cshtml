@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WorkshopDotNet.Modello.Entita.Dispositivo>
+
+    @{ 
+        if (TempData.ContainsKey("msg"))
+        {
+            <div class="alert alert-danger">@TempData["msg"]</div>
+        }
+        else if (TempData.ContainsKey("msg-ok"))
+        {
+            <div class="alert alert-success">@TempData["msg-ok"]</div>
+        }
+    }
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descrizione)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataInstallazione)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @*Html.Raw(item.Descrizione)*@
+                @Html.DisplayFor(modelItem => item.Descrizione)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInstallazione)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.IdDispositivo }) |
+                @Html.ActionLink("Details", "Details", new { id=item.IdDispositivo }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.IdDispositivo })
+            </td>
+        </tr>
+    }
+    
+    </table>
+

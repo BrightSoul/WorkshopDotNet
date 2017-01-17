@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documenti", "Documenti", "{
 		docs\Specifica.txt = docs\Specifica.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopDotNet.Web", "WorkshopDotNet.Web\WorkshopDotNet.Web.csproj", "{979CD99A-177C-4648-9ABA-541148CA5A80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{1655125B-B8E1-40F4-AA8D-78623C5BB0D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1655125B-B8E1-40F4-AA8D-78623C5BB0D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1655125B-B8E1-40F4-AA8D-78623C5BB0D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{979CD99A-177C-4648-9ABA-541148CA5A80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{979CD99A-177C-4648-9ABA-541148CA5A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{979CD99A-177C-4648-9ABA-541148CA5A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{979CD99A-177C-4648-9ABA-541148CA5A80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
