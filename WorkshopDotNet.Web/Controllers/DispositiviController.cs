@@ -45,12 +45,20 @@ namespace WorkshopDotNet.Web.Controllers
         {
             try
             {
-                using (Contesto ctx = new Contesto()) {
-                    ctx.Set<Dispositivo>().Add(dispositivo);
-                    await ctx.SaveChangesAsync();
-                }
 
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    using (Contesto ctx = new Contesto())
+                    {
+                        ctx.Set<Dispositivo>().Add(dispositivo);
+                        await ctx.SaveChangesAsync();
+                    }
+
+                    return RedirectToAction("Index");
+                } else
+                {
+                    throw new InvalidOperationException("Attenzione, il modello non era valido");
+                }
             }
             catch
             {
