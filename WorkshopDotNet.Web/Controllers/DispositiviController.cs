@@ -15,16 +15,12 @@ namespace WorkshopDotNet.Web.Controllers
         public ActionResult Index()
         {
             // list all the devices in the DB
-
-
             using (Contesto contesto = new Contesto())
             {
                 var elencoDispositivi = contesto.Set<Dispositivo>().ToList();
                 //numerorisultati = contesto.Set<Telemetria>().Where(telemet => telemet.DataSalvataggio == telemetria.DataSalvataggio).Count();
                 return View(elencoDispositivi);
             }
-
-            
         }
 
         // GET: Dispositivi/Details/5
@@ -134,25 +130,28 @@ namespace WorkshopDotNet.Web.Controllers
         }
 
         // GET: Dispositivi/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int? id)
         {
-            return View();
-        }
-
-        // POST: Dispositivi/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
+            if (!id.HasValue)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                TempData["msg"] = "Non è stato indicato il dispositivo da modificare";
+                return RedirectToAction(nameof(Index));
             }
-            catch
+            using (Contesto ctx = new Contesto())
             {
-                return View();
+                Dispositivo disp = ctx.Set<Dispositivo>().Where(d => d.IdDispositivo == id).FirstOrDefault();
+                if (disp == null)
+                {
+                    TempData["msg"] = "Il dispositivo che volevi eliminare non esiste";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                ctx.Set<Dispositivo>().Remove(disp);
+
+                await ctx.SaveChangesAsync();
             }
+            TempData["msg-ok"] = "Il dispositivo è stato eliminato";
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <p style="margin-bottom:30px;">Ultima rilevazione: <span id="ultimaRilevazione"></span></p>
+    <p style="margin:30px 0; font-size:14px; color:#AAA;" class="text-center">Ultima rilevazione: <span id="ultimaRilevazione">-</span></p>
     <h4>Dispositivo</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -55,8 +55,12 @@
         temperatura: [],
         umidita: []
     };
+
+    function timestampAttuale() {
+        return (new Date()).valueOf();
+    }
     function creaGrafico(selettore, tipo, minimo, massimo) {
-        var grafico = $.plot(selettore, [[]], {
+        var grafico = $.plot(selettore, [], {
             series: {
                 shadowSize: 0,	// Drawing is faster without shadows
                 lines: { show: true, lineWidth: 2 },
@@ -79,14 +83,13 @@
         grafici.push(grafico);
     }
 
-    function timestampAttuale() {
-        return (new Date()).valueOf();
-    }
+
 
     function aggiornaGrafici() {
 
         for (var i = 0; i < grafici.length; i++) {
-            grafici[i].setData(punti[grafici[i].tipo]);
+            var dati = punti[grafici[i].tipo];
+            grafici[i].setData([{ color: '#5bc0de', data: dati }]);
 
             var ora = timestampAttuale();
 
