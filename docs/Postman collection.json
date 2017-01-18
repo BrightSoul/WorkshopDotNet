@@ -1,0 +1,58 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Web API Telemetria",
+		"_postman_id": "65c8cde6-c4a8-d4ae-e8c3-fd0485dc8d59",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Invio di telemetria da dispositivo 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"postman.setEnvironmentVariable(\"temperatura\", Math.round(Math.random() * 20 + 40)/10);",
+							"postman.setEnvironmentVariable(\"umidita\", Math.round(Math.random() * 10) + 60);",
+							"postman.setEnvironmentVariable(\"dataEvento\", new Date().toISOString());"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:17843/api/Telemetria",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"temperatura\": {{temperatura}}, \"umidita\": {{umidita}}, \"dataEvento\":\"{{dataEvento}}\", \"idDispositivo\": 1 }"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
