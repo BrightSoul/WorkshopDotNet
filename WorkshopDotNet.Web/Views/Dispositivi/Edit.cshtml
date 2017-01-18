@@ -13,12 +13,6 @@
     <div class="form-horizontal">
         <h4>Dispositivo</h4>
         <hr />
-
-        <ul id="telemetria">
-        </ul>
-
-
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IdDispositivo)
 
@@ -45,25 +39,6 @@
         </div>
     </div>
 }
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-
-<script type="text/javascript">
-        $(function () {
-            // Declare a proxy to reference the hub.
-            var telemetria = $.connection.telemetriaHub;
-            // Create a function that the hub can call to broadcast messages.
-            telemetria.client.riceviMessaggio = function (telemetria) {
-                var li = $("<li />");
-                li.text("Temperatura: " + telemetria.Temperatura + ", Umidità: " + telemetria.Umidita + ", " + telemetria.DataSalvataggio);
-                $("#telemetria").append(li);
-            };
-
-            $.connection.hub.start().done(function () {
-                telemetria.server.sottoscriviRicezione(@Model.IdDispositivo);
-            });
-        });
-</script>

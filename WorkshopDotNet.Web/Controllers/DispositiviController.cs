@@ -28,9 +28,26 @@ namespace WorkshopDotNet.Web.Controllers
         }
 
         // GET: Dispositivi/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+
+            if (!id.HasValue)
+            {
+                TempData["msg"] = "Non è stato indicato il dispositivo da visualizzare";
+                return RedirectToAction(nameof(Index));
+            }
+
+            using (Contesto ctx = new Contesto())
+            {
+                Dispositivo disp = ctx.Set<Dispositivo>().Where(d => d.IdDispositivo == id).FirstOrDefault();
+                if (disp == null)
+                {
+                    TempData["msg"] = "Il dispositivo che volevi visualizzare non esiste";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return View(disp);
+            }
         }
 
         // GET: Dispositivi/Create

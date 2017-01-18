@@ -1,0 +1,127 @@
+﻿@model WorkshopDotNet.Modello.Entita.Dispositivo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Temperatura attuale: <span id="temperaturaAttuale">-</span> °C</h3>
+            <div id="graficoTemperatura" style="height:200px;">
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Umidità attuale: <span id="umiditaAttuale">-</span>%</h3>
+            <div id="graficoUmidita" style="height:200px;">
+
+            </div>
+        </div>
+    </div>
+    <p style="margin-bottom:30px;">Ultima rilevazione: <span id="ultimaRilevazione"></span></p>
+    <h4>Dispositivo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descrizione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descrizione)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataInstallazione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataInstallazione)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdDispositivo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section Scripts {
+<script type="text/javascript">
+    var grafici = [];
+    var punti = {
+        temperatura: [],
+        umidita: []
+    };
+    function creaGrafico(selettore, tipo, minimo, massimo) {
+        var grafico = $.plot(selettore, [[]], {
+            series: {
+                shadowSize: 0,	// Drawing is faster without shadows
+                lines: { show: true, lineWidth: 2 },
+            },
+            yaxis: {
+                min: minimo,
+                max: massimo
+            },
+            xaxis: {
+                show: true,
+                mode: 'time',
+                timezone: "browser",
+                minTickSize: [1, "minute"],
+                max: timestampAttuale(),
+                min: timestampAttuale() - 2 * 60 * 1000 //mostriamo gli ultimi due minuti
+            }
+        });
+        //tengo un riferimento al grafico che ho creato per poterlo poi aggiornare
+        grafico.tipo = tipo;
+        grafici.push(grafico);
+    }
+
+    function timestampAttuale() {
+        return (new Date()).valueOf();
+    }
+
+    function aggiornaGrafici() {
+
+        for (var i = 0; i < grafici.length; i++) {
+            grafici[i].setData(punti[grafici[i].tipo]);
+
+            var ora = timestampAttuale();
+
+            grafici[i].getOptions().xaxes[0].max = ora;
+            grafici[i].getOptions().xaxes[0].min = ora - (2 * 60 * 1000);
+
+            grafici[i].setupGrid();
+            grafici[i].draw();
+
+        }
+    }
+
+    $(function () {
+
+        creaGrafico("#graficoTemperatura", "temperatura", -5, 10);
+        creaGrafico("#graficoUmidita", "umidita", 0, 100);
+        //Aggiorno il grafico 1 volta al secondo
+        //Se nel frattempo sono arrivati valori di telemetria, verranno mostrati
+        setInterval(aggiornaGrafici, 1000);
+
+            // Declare a proxy to reference the hub.
+            var telemetria = $.connection.telemetriaHub;
+            // Create a function that the hub can call to broadcast messages.
+            telemetria.client.riceviMessaggio = function (telemetria) {
+                $("#temperaturaAttuale").text(telemetria.Temperatura);
+                $("#umiditaAttuale").text(telemetria.Umidita);
+                $("#ultimaRilevazione").text(telemetria.DataEvento);
+                var data = new Date(telemetria.DataEvento).valueOf();
+                punti.temperatura.push([data, telemetria.Temperatura]);
+                punti.umidita.push([data, telemetria.Umidita]);
+            };
+
+            $.connection.hub.start().done(function () {
+                telemetria.server.sottoscriviRicezione(@Model.IdDispositivo);
+            });
+        });
+</script>
+}

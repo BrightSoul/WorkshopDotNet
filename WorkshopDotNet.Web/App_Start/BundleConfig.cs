@@ -14,6 +14,11 @@ namespace WorkshopDotNet.Web
                         "~/Scripts/jquery.signalR-{version}.js"
                         ));
 
+            bundles.Add(new ScriptBundle("~/bundles/flot").Include(
+                        "~/Scripts/flot/jquery.flot.js",
+                        "~/Scripts/flot/jquery.flot.time.js"
+                        ));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
