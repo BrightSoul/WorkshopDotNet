@@ -10,6 +10,7 @@ using IdentityManager.Configuration;
 using IdentityManager;
 using Microsoft.AspNet.Identity.EntityFramework;
 using IdentityManager.AspNetIdentity;
+using Microsoft.Owin.Security.OAuth;
 
 namespace WorkshopDotNet.Web
 {
@@ -36,8 +37,16 @@ namespace WorkshopDotNet.Web
                     // Questa funzionalità di sicurezza è utile quando si cambia una password o si aggiungono i dati di un account di accesso esterno all'account personale.  
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
                         validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
-                }
+                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager)),
+                    OnApplyRedirect = ctx =>
+                    {
+                        var response = ctx.Response;
+                        if (!IsApiResponse(ctx.Response))
+                        {
+                            response.Redirect(ctx.RedirectUri);
+                        }
+                    }
+                },
             });            
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
@@ -68,6 +77,20 @@ namespace WorkshopDotNet.Web
             //    ClientSecret = ""
             //});
 
+            #region Bearer token
+            var oAuthOptions = new OAuthAuthorizationServerOptions
+            {
+                TokenEndpointPath = new PathString("/api/Token"),
+                Provider = new ApplicationOAuthProvider("self"),
+                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                // In production mode set AllowInsecureHttp = false
+                AllowInsecureHttp = true
+            };
+
+            // Enable the application to use bearer tokens to authenticate users
+            app.UseOAuthBearerTokens(oAuthOptions);
+            #endregion
 
             #region IdentityManagerConfiguration
             var factory = new IdentityManagerServiceFactory();
@@ -113,6 +136,15 @@ namespace WorkshopDotNet.Web
 
             #endregion
 
+        }
+        private static bool IsApiResponse(IOwinResponse response)
+        {
+            var responseHeader = response.Headers;
+
+            if (responseHeader == null)
+                return false;
+
+            return (responseHeader["Suppress-Redirect"] == "True");
         }
     }
 }

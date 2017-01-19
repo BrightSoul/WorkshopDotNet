@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using WorkshopDotNet.Web.MessageHandlers;
 
 namespace WorkshopDotNet.Web
 {
@@ -13,7 +14,7 @@ namespace WorkshopDotNet.Web
 
             // Route dell'API Web
             config.MapHttpAttributeRoutes();
-
+            config.MessageHandlers.Add(new SuppressRedirectHandler());
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

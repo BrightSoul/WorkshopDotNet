@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WorkshopDotNet.Modello.Entita
@@ -11,6 +12,7 @@ namespace WorkshopDotNet.Modello.Entita
         public DateTime DataEvento { get; set; }
         public DateTime DataSalvataggio { get; set; }
         public int IdDispositivo { get; set; }
+        [JsonIgnore]
         public virtual Dispositivo Dispositivo { get; set; }
     }
 }
