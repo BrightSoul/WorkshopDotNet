@@ -6,6 +6,10 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using WorkshopDotNet.Web.Models;
+using IdentityManager.Configuration;
+using IdentityManager;
+using Microsoft.AspNet.Identity.EntityFramework;
+using IdentityManager.AspNetIdentity;
 
 namespace WorkshopDotNet.Web
 {
@@ -63,6 +67,52 @@ namespace WorkshopDotNet.Web
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+
+            #region IdentityManagerConfiguration
+            var factory = new IdentityManagerServiceFactory();
+
+            // In questo specifico esempio, usiamo Entity Framework 
+            // e perciò registriamo le classi UserStore<TUser> e 
+            // RoleStore<TRole> dal namespace Microsoft.AspNet.Identity.EntityFramework
+            factory.IdentityManagerService = new Registration<IIdentityManagerService>(
+              resolver =>
+              {
+                  var userManager =
+        new UserManager<IdentityUser>(new UserStore<IdentityUser>());
+                  var roleManager =
+        new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
+                  return new AspNetIdentityManagerService<
+        IdentityUser, string, IdentityRole, string>(userManager, roleManager);
+              });
+
+            // Creiamo l'oggetto di configurazione
+            var managerOptions = new IdentityManagerOptions
+            {
+                // Consentiamo l'accesso solo dalla macchina locale
+                SecurityConfiguration = new LocalhostSecurityConfiguration
+                {
+                    RequireSsl = false
+                },
+
+                // Potremmo decidere di fare a meno dell'interfaccia grafica, 
+                // se volessimo sfruttare la Web API sottostante, esposta 
+                // su /identitymanager/api
+                DisableUserInterface = false,
+
+                //Indichiamo la factory creata in precedenza
+                Factory = factory
+            };
+
+            // Infine, registriamo il middleware indicando il percorso
+            // da cui desideriamo accedere al pannello di gestione
+            app.Map("/identitymanager", map =>
+            {
+                map.UseIdentityManager(managerOptions);
+            });
+
+            #endregion
+
         }
     }
 }
