@@ -24,6 +24,7 @@ namespace WorkshopDotNet.Web
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
+            #region cookie authentication
             // Consentire all'applicazione di utilizzare un cookie per memorizzare informazioni relative all'utente connesso
             // e per memorizzare temporaneamente le informazioni relative a un utente che accede tramite un provider di accesso di terze parti
             // Configurare il cookie di accesso
@@ -58,6 +59,9 @@ namespace WorkshopDotNet.Web
             // È simile all'opzione RememberMe disponibile durante l'accesso.
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
+            #endregion
+
+            #region external login
             // Rimuovere il commento dalle seguenti righe per abilitare l'accesso con provider di accesso di terze parti
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
@@ -76,6 +80,8 @@ namespace WorkshopDotNet.Web
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+            #endregion
+
 
             #region Bearer token
             var oAuthOptions = new OAuthAuthorizationServerOptions
