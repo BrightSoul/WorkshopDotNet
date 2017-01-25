@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documenti", "Documenti", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopDotNet.Web", "WorkshopDotNet.Web\WorkshopDotNet.Web.csproj", "{979CD99A-177C-4648-9ABA-541148CA5A80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopDotNet.FrigoriferoSimulato", "WorkshopDotNet.FrigoriferoSimulato\WorkshopDotNet.FrigoriferoSimulato.csproj", "{40888E5D-8898-45FA-B503-E341D1BB316E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,8 +35,15 @@ Global
 		{979CD99A-177C-4648-9ABA-541148CA5A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{979CD99A-177C-4648-9ABA-541148CA5A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{979CD99A-177C-4648-9ABA-541148CA5A80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40888E5D-8898-45FA-B503-E341D1BB316E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40888E5D-8898-45FA-B503-E341D1BB316E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40888E5D-8898-45FA-B503-E341D1BB316E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40888E5D-8898-45FA-B503-E341D1BB316E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8
 	EndGlobalSection
 EndGlobal
